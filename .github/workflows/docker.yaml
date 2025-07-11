@@ -24,8 +24,8 @@ jobs:
 
     - name: Login to Amazon ECR
       run: |
-        aws ecr get-login-password |
-        docker login --username AWS --password-stdin 795438191363.dkr.ecr.us-east-1.amazonaws.com
+        DOMAIN=$(echo "${{ secrets.ECR_REPO_URI }}" | cut -d'/' -f1)
+        aws ecr get-login-password | docker login --username AWS --password-stdin $DOMAIN
 
 
     - name: Build Docker image and tag
