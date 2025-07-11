@@ -39,3 +39,9 @@ jobs:
         COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
         docker push ${{ secrets.ECR_REPO_URI }}:latest
         docker push ${{ secrets.ECR_REPO_URI }}:$COMMIT_SHA
+   
+    - name: Deploy to EKS
+      run: |
+        aws eks update-kubeconfig --name my-cluster --region ${{ secrets.AWS_REGION }}
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
