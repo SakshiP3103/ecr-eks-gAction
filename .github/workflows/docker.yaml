@@ -36,5 +36,6 @@ jobs:
 
     - name: Push images to ECR
       run: |
+        COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
         docker push ${{ secrets.ECR_REPO_URI }}:latest
         docker push ${{ secrets.ECR_REPO_URI }}:$COMMIT_SHA
