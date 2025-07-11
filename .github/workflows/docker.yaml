@@ -25,7 +25,6 @@ jobs:
     - name: Login to Amazon ECR
       run: |
         aws ecr get-login-password |
-        aws ecr get-login-password |
         docker login --username AWS --password-stdin 795438191363.dkr.ecr.us-east-1.amazonaws.com
 
 
